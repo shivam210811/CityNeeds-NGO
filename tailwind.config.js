@@ -17,6 +17,24 @@ module.exports = {
           800: '#075985',
           900: '#0c4a6e',
         }
+      },
+      animation: {
+        'ping-slow': 'ping-slow 2s cubic-bezier(0, 0, 0.2, 1) infinite',
+        'float': 'float 3s ease-in-out infinite',
+        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'bounce-slow': 'bounce 2s infinite',
+      },
+      keyframes: {
+        'ping-slow': {
+          '75%, 100%': {
+            transform: 'scale(2)',
+            opacity: '0'
+          }
+        },
+        'float': {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-10px)' }
+        }
       }
     }
   },

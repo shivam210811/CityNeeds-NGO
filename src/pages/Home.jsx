@@ -128,12 +128,12 @@ const Home = () => {
             {/* Event Badge */}
             <div className="inline-flex items-center gap-2 mb-8 px-6 py-3 rounded-full bg-gradient-to-r from-blue-100 to-purple-100 text-blue-700 border border-blue-200 shadow-sm">
               <Sparkles className="w-5 h-5" />
-              <span className="text-base font-semibold">India's Largest NGO Expo</span>
+              <span className="text-base font-semibold">India's Largest CityNeeds Help Locally</span>
             </div>
             
             {/* Main Title */}
             <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-6 leading-tight">
-              <span className="block text-gray-900">NGO Expo</span>
+              <span className="block text-gray-900">CityNeeds Help Locally</span>
               <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
                 {new Date().getFullYear()}
               </span>
