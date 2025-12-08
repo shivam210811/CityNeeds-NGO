@@ -1,5 +1,5 @@
 // src/pages/About.jsx
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   Calendar, 
@@ -26,10 +26,19 @@ import {
   Building2,
   Wifi,
   Mic,
-  Trophy
+  Trophy,
+  ChevronLeft,
+  ChevronRight as ChevronRightIcon
 } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+// Import local images
+import bgImage1 from '../assets/bgImage1.PNG'; // Example: Event venue
+import bgImage2 from '../assets/bgImage2.PNG'; // Example: Networking
+import bgImage3 from '../assets/bgImage3.PNG'; // Example: Exhibition
+import bgImage4 from '../assets/bgImage2.PNG'; // Example: Cultural event
+import bgImage5 from '../assets/bgImage1.PNG'; // Example: Volunteers
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -39,11 +48,23 @@ const About = () => {
   const sectionRef = useRef(null);
   const titleRef = useRef(null);
   const cardsRef = useRef([]);
+  const carouselRef = useRef(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  // Carousel images array
+  const carouselImages = [
+    { src: bgImage1, title: "Event Venue", description: "PAU Ground, Ludhiana - The heart of Punjab NGO Expo 2026" },
+    { src: bgImage2, title: "Networking Sessions", description: "Connect with changemakers from across Punjab" },
+    { src: bgImage3, title: "Exhibition Stalls", description: "Showcase your initiatives to 10,000+ delegates" },
+    { src: bgImage4, title: "Cultural Performances", description: "Celebrating Punjab's rich cultural heritage" },
+    { src: bgImage5, title: "Volunteer Engagement", description: "Youth participation in community service" }
+  ];
 
   useEffect(() => {
     window.scrollTo(0, 0);
     
     const ctx = gsap.context(() => {
+      // Title animation
       gsap.from(titleRef.current, {
         y: 50,
         opacity: 0,
@@ -51,6 +72,7 @@ const About = () => {
         ease: 'power3.out'
       });
 
+      // Cards animation
       gsap.from(cardsRef.current, {
         y: 60,
         opacity: 0,
@@ -64,6 +86,30 @@ const About = () => {
         }
       });
 
+      // Carousel animation
+      gsap.from('.carousel-container', {
+        scale: 0.9,
+        opacity: 0,
+        duration: 1.2,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.carousel-container',
+          start: 'top 80%',
+          toggleActions: 'play none none none'
+        }
+      });
+
+      // Carousel slide animation
+      const slides = carouselRef.current?.querySelectorAll('.carousel-slide');
+      slides?.forEach((slide, index) => {
+        gsap.from(slide, {
+          x: index % 2 === 0 ? 100 : -100,
+          opacity: 0,
+          duration: 0.8,
+          ease: 'power3.out'
+        });
+      });
+
       // Floating animation
       gsap.to('.floating-card', {
         y: -10,
@@ -75,8 +121,28 @@ const About = () => {
       });
     });
 
-    return () => ctx.revert();
+    // Auto slide carousel
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
+    }, 5000);
+
+    return () => {
+      ctx.revert();
+      clearInterval(interval);
+    };
   }, []);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % carouselImages.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + carouselImages.length) % carouselImages.length);
+  };
+
+  const goToSlide = (index) => {
+    setCurrentSlide(index);
+  };
 
   const participationTypes = [
     {
@@ -196,6 +262,120 @@ const About = () => {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Image Carousel Section */}
+      <div className="carousel-container py-16 px-4 bg-gradient-to-b from-white to-blue-50">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
+            <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+              Glimpse of Our Vision
+            </span>
+          </h2>
+          
+          <div ref={carouselRef} className="relative overflow-hidden rounded-3xl shadow-2xl">
+            {/* Carousel Slides */}
+            <div className="relative h-[500px] md:h-[600px]">
+              {carouselImages.map((image, index) => (
+                <div
+                  key={index}
+                  className={`carousel-slide absolute inset-0 transition-all duration-700 ease-in-out ${
+                    index === currentSlide ? 'opacity-100' : 'opacity-0 pointer-events-none'
+                  }`}
+                >
+                  <div className="relative h-full">
+                    <img
+                      src={image.src}
+                      alt={image.title}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent">
+                      <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12">
+                        <div className="max-w-2xl">
+                          <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                            {image.title}
+                          </h3>
+                          <p className="text-lg md:text-xl text-blue-100">
+                            {image.description}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Navigation Buttons */}
+            <button
+              onClick={prevSlide}
+              className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full p-3 transition-all duration-300 group"
+              aria-label="Previous slide"
+            >
+              <ChevronLeft className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
+            </button>
+            
+            <button
+              onClick={nextSlide}
+              className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full p-3 transition-all duration-300 group"
+              aria-label="Next slide"
+            >
+              <ChevronRightIcon className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
+            </button>
+
+            {/* Slide Indicators */}
+            <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-3">
+              {carouselImages.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => goToSlide(index)}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    index === currentSlide 
+                      ? 'bg-white w-8' 
+                      : 'bg-white/50 hover:bg-white/70'
+                  }`}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
+            </div>
+
+            {/* Slide Counter */}
+            <div className="absolute top-6 right-6 bg-black/50 backdrop-blur-sm rounded-full px-4 py-2 text-white font-medium">
+              {currentSlide + 1} / {carouselImages.length}
+            </div>
+          </div>
+
+          {/* Carousel Thumbnails */}
+          <div className="mt-8 grid grid-cols-2 md:grid-cols-5 gap-4">
+            {carouselImages.map((image, index) => (
+              <button
+                key={index}
+                onClick={() => goToSlide(index)}
+                className={`relative overflow-hidden rounded-xl transition-all duration-300 transform ${
+                  index === currentSlide 
+                    ? 'ring-4 ring-blue-500 ring-offset-2 scale-105' 
+                    : 'hover:scale-105 hover:shadow-lg'
+                }`}
+              >
+                <img
+                  src={image.src}
+                  alt={`Thumbnail ${index + 1}`}
+                  className="w-full h-24 md:h-32 object-cover"
+                />
+                <div className={`absolute inset-0 ${
+                  index === currentSlide ? 'bg-blue-500/20' : 'bg-black/20'
+                } transition-colors duration-300`} />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  {index === currentSlide && (
+                    <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                      <ChevronRightIcon className="w-5 h-5 text-white" />
+                    </div>
+                  )}
+                </div>
+              </button>
+            ))}
           </div>
         </div>
       </div>
