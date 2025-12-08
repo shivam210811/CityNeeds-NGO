@@ -1,5 +1,6 @@
 // src/components/Layout/Footer.jsx
 import { Link } from 'react-router-dom';
+import logo from "../../assets/logo_dark.png"
 import { Heart, Mail, Phone, MapPin } from 'lucide-react';
 
 const Footer = () => {
@@ -13,14 +14,9 @@ const Footer = () => {
 
             {/* Brand */}
             <div>
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl flex items-center justify-center">
-                  <Heart className="w-7 h-7" />
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold">CityNeeds Help Locally</h3>
-                  <p className="text-sm text-gray-400">{currentYear}</p>
-                </div>
+              <div className="flex items-center">
+                <img src={logo} alt="CityNeeds Logo" className="w-60 h-40 object-contain" />
+               
               </div>
               <p className="text-gray-400 leading-relaxed">
                 Connecting NGOs, donors, and changemakers to create sustainable social impact.

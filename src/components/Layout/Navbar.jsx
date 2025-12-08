@@ -1,7 +1,7 @@
 // src/components/Layout/Navbar.jsx - Complete Enhanced Version
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ChevronDown, Circle } from 'lucide-react';
+import { Menu, X, ChevronDown, Circle, Phone } from 'lucide-react';
 import Logo from "../../assets/logo_dark.png";
 
 const Navbar = () => {
@@ -43,14 +43,7 @@ const Navbar = () => {
     },
     { path: '/stall-booking', label: 'Stall Booking' },
     { path: '/sponsorship', label: 'Sponsorship' },
-    { 
-      label: 'More', 
-      submenu: [
-        { path: '/resources', label: 'Resources' },
-        { path: '/faq', label: 'FAQ' },
-        { path: '/contact', label: 'Contact' },
-      ]
-    },
+   
   ];
 
   return (
@@ -61,7 +54,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group">
-            <div className="w-64 h-12 overflow-hidden group-hover:scale-105 transition-transform duration-300">
+            <div className="w-64 h-auto overflow-hidden group-hover:scale-105 transition-transform duration-300">
               <img 
                 src={Logo} 
                 alt="CityNeeds Help Locally Logo" 
@@ -71,7 +64,7 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-6">
             {navItems.map((item) => (
               <div key={item.label} className="relative">
                 {item.path ? (
@@ -162,9 +155,20 @@ const Navbar = () => {
               </div>
             ))}
             
+            {/* Contact Button */}
+            <Link
+              to="/contact"
+              className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-full text-base font-semibold hover:shadow-xl transition-all duration-300 hover:scale-105 transform shadow-lg relative overflow-hidden group"
+            >
+              <Phone className="w-5 h-5" />
+              <span className="relative z-10">Contact Us</span>
+              <span className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-green-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+            </Link>
+            
+            {/* Register Now Button */}
             <Link
               to="/registration"
-              className="ml-4 px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full text-base font-semibold hover:shadow-xl transition-all duration-300 hover:scale-105 transform shadow-lg relative overflow-hidden group"
+              className="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full text-base font-semibold hover:shadow-xl transition-all duration-300 hover:scale-105 transform shadow-lg relative overflow-hidden group"
             >
               <span className="relative z-10">Register Now</span>
               <span className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
@@ -251,7 +255,19 @@ const Navbar = () => {
               </div>
             ))}
             
-            <div className="pt-6 mt-4 border-t border-gray-100">
+            <div className="pt-6 mt-4 border-t border-gray-100 space-y-4">
+              {/* Contact Us Mobile Button */}
+              <Link
+                to="/contact"
+                className="flex items-center justify-center gap-3 py-4 px-6 bg-gradient-to-r from-green-500 to-emerald-600 text-white text-center rounded-xl font-semibold text-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden group"
+                onClick={() => setIsOpen(false)}
+              >
+                <Phone className="w-5 h-5" />
+                <span className="relative z-10">Contact Us</span>
+                <span className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-green-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+              </Link>
+              
+              {/* Register Now Mobile Button */}
               <Link
                 to="/registration"
                 className="block py-4 px-6 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-center rounded-xl font-semibold text-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden group"

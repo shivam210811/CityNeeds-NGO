@@ -7,11 +7,11 @@ import Layout from './components/Layout/Layout';
 import Home from './pages/Home';
 import About from './pages/About';
 import Schedule from './pages/Schedule';
-// import Venue from './pages/Venue';
-// import Program from './pages/Program';
-// import StallBooking from './pages/StallBooking';
+import Venue from './pages/Venue';
+import Program from './pages/Program';
+import StallBooking from './pages/Faq';
 import Registration from './pages/Registration';
-// import Sponsorship from './pages/Sponsorship';
+import Sponsorship from './pages/SponserShip';
 // import Resources from './pages/Resources';
 import FAQ from './pages/Faq';
 import Contact from './pages/Contact';
@@ -40,12 +40,15 @@ function App() {
           <Route path="/Schedule" element={<Schedule />} />
           <Route path="/contact" element={<Contact />} /> 
           <Route path="/faq" element={<FAQ />} />
-          {/* <Route path="/about" element={<About />} />
+          <Route path="/stall-booking" element={<StallBooking />} />
           <Route path="/venue" element={<Venue />} />
           <Route path="/program" element={<Program />} />
-          <Route path="/stall-booking" element={<StallBooking />} />
-          
           <Route path="/sponsorship" element={<Sponsorship />} />
+
+          {/* <Route path="/about" element={<About />} />
+   
+          
+          
           <Route path="/resources" element={<Resources />} />
           
           */}

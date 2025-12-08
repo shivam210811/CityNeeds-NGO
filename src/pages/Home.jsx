@@ -133,9 +133,10 @@ const Home = () => {
             
             {/* Main Title */}
             <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-6 leading-tight">
-              <span className="block text-gray-900">CityNeeds Help Locally</span>
+              <span className="block text-gray-900">Punjab NGO Expo</span>
               <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-                {new Date().getFullYear()}
+                2026
+                {/* {new Date().getFullYear()} */}
               </span>
             </h1>
             
@@ -148,11 +149,11 @@ const Home = () => {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 text-gray-500 mb-12">
               <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm">
                 <Calendar className="w-5 h-5 text-blue-600" />
-                <span className="font-medium">March 15-17, 2024</span>
+                <span className="font-medium">31st Jan & 1st Feb, 2026</span>
               </div>
               <div className="hidden sm:block text-blue-400">•</div>
               <div className="bg-white px-4 py-2 rounded-full shadow-sm">
-                <span className="font-medium">New Delhi Convention Center</span>
+                <span className="font-medium">📍 PAU Ground, Ludhiana</span>
               </div>
             </div>
             
