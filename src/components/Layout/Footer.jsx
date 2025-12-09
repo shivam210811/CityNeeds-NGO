@@ -56,8 +56,8 @@ const Footer = () => {
 
                 <div className="flex items-center gap-3">
                   <Phone className="w-5 h-5 text-blue-400" />
-                  <a href="tel:+918289066979" className="text-gray-400 hover:text-white">
-                    8289066979
+                  <a href="tel:+919310000925" className="text-gray-400 hover:text-white">
+                    93100 00925
                   </a>
                 </div>
 
@@ -70,7 +70,7 @@ const Footer = () => {
 
                 {/* WhatsApp Chatbot */}
                 <a
-                  href="https://wa.me/1615063805"
+                  href="https://wa.me/919310000925?text=Hi"
                   target="_blank"
                   className="flex items-center gap-3 text-gray-400 hover:text-green-400 transition"
                 >
@@ -79,7 +79,7 @@ const Footer = () => {
                     alt="WhatsApp"
                     className="w-6 h-6"
                   />
-                  : 161 506 3805
+                  : 919310000925
                 </a>
 
               </div>
