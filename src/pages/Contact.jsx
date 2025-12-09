@@ -46,18 +46,20 @@ const Contact = () => {
     
     // GSAP Animations
     const ctx = gsap.context(() => {
-      gsap.from('.contact-card', {
-        y: 40,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.2,
-        ease: 'back.out(1.2)',
-        scrollTrigger: {
-          trigger: '.contact-grid',
-          start: 'top 70%',
-          toggleActions: 'play none none none'
-        }
-      });
+    gsap.from(".contact-card", {
+  opacity: 90,
+  y: 10,
+  duration: 1,
+  ease: "power3.out",
+  stagger: 0.15,
+  scrollTrigger: {
+    trigger: ".contact-grid",
+    start: "top 90%",   // 🔥 triggers earlier so all cards become visible
+    end: "bottom 50%", // ensures ALL cards animate properly
+    toggleActions: "play none none none",
+  },
+});
+
 
       gsap.from('.form-card', {
         x: -30,
@@ -230,36 +232,48 @@ const Contact = () => {
           
             
             {/* Contact Cards Grid */}
-            <div className="contact-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
-              {contactDetails.map((item, index) => (
-                <div 
-                  key={index}
-                  className="contact-card bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100 group"
-                >
-                  <div className={`${item.bgColor} w-14 h-14 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                    <item.icon className="w-7 h-7 text-white" />
-                  </div>
-                  
-                  <h3 className="text-xl font-bold text-gray-900 mb-4">{item.title}</h3>
-                  
-                  <div className="space-y-2 mb-4">
-                    {item.details.map((detail, idx) => (
-                      <p key={idx} className="text-gray-600">{detail}</p>
-                    ))}
-                  </div>
-                  
-                  {item.link && (
-                    <a 
-                      href={item.link}
-                      className="inline-flex items-center gap-2 text-blue-600 font-semibold hover:text-blue-800 transition-colors duration-300 group/link"
-                    >
-                      Contact via {item.title.toLowerCase()}
-                      <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform" />
-                    </a>
-                  )}
-                </div>
-              ))}
-            </div>
+            <div className="contact-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+  {contactDetails.map((item, index) => (
+    <div
+      key={index}
+      className="contact-card bg-white/90 backdrop-blur-xl rounded-2xl p-7 shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-200"
+    >
+      {/* ICON BOX */}
+      <div
+        className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 bg-gradient-to-br ${item.bgColor} shadow-md transition-transform duration-300 hover:scale-110`}
+      >
+        <item.icon className="w-8 h-8 text-white drop-shadow-lg" />
+      </div>
+
+      {/* TITLE */}
+      <h3 className="text-xl font-bold text-gray-900 mb-3 tracking-wide">
+        {item.title}
+      </h3>
+
+      {/* DETAILS */}
+      <div className="space-y-2 mb-5 text-gray-700">
+        {item.details.map((detail, idx) => (
+          <p key={idx}>{detail}</p>
+        ))}
+      </div>
+
+      {/* LINK BUTTON */}
+      {item.link && (
+        <a
+          href={item.link}
+          className="inline-flex items-center gap-2 text-blue-600 font-semibold hover:text-blue-800 transition-all duration-300"
+        >
+          <span className="relative">
+            Contact via {item.title.toLowerCase()}
+            <span className="absolute left-0 -bottom-1 w-full h-[2px] bg-blue-600 scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+          </span>
+          <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+        </a>
+      )}
+    </div>
+  ))}
+</div>
+
 
             {/* Department Contacts */}
             <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-3xl p-8 mb-12 border border-blue-200">
